@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLenis } from '@/hooks/use-lenis';
 import { Preloader } from '@/components/Preloader';
 import { Cursor } from '@/components/Cursor';
@@ -21,6 +21,13 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useLenis();
+
+  useEffect(() => {
+    const fallback = window.setTimeout(() => {
+      setLoading(false);
+    }, 3500);
+    return () => window.clearTimeout(fallback);
+  }, []);
 
   return (
     <>
