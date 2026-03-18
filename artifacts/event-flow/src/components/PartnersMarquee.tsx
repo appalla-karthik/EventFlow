@@ -1,25 +1,25 @@
 const LOGOS_ROW_ONE = [
   "APPLE",
-  "MICROSOFT",
   "GOOGLE",
+  "MICROSOFT",
   "AMAZON",
-  "NETFLIX",
+  "META",
+  "TESLA",
   "ADOBE",
   "SPOTIFY",
   "AIRBNB",
-  "SHOPIFY",
 ];
 
 const LOGOS_ROW_TWO = [
   "NIKE",
-  "BMW",
   "SAMSUNG",
-  "TESLA",
   "SALESFORCE",
   "ORACLE",
   "IBM",
   "INTEL",
   "PAYPAL",
+  "NETFLIX",
+  "SHOPIFY",
 ];
 
 const repeatLogos = (logos: string[], copies = 2) =>
@@ -44,7 +44,7 @@ export function PartnersMarquee() {
         </p>
       </div>
 
-      <div className="mt-10 space-y-6">
+      <div className="mt-10 space-y-7">
         <div className="partners-marquee">
           <div className="partners-sway">
             <div className="partners-track partners-track-one">
@@ -59,7 +59,8 @@ export function PartnersMarquee() {
                     ['--delay' as never]: `${(idx % 8) * 0.18}s`,
                   }}
                 >
-                  {logo}
+                  <span className="partners-mark" aria-hidden="true" />
+                  <span className="partners-name">{logo}</span>
                 </span>
               ))}
             </div>
@@ -79,7 +80,8 @@ export function PartnersMarquee() {
                     ['--delay' as never]: `${(idx % 8) * 0.16}s`,
                   }}
                 >
-                  {logo}
+                  <span className="partners-mark" aria-hidden="true" />
+                  <span className="partners-name">{logo}</span>
                 </span>
               ))}
             </div>
@@ -90,7 +92,7 @@ export function PartnersMarquee() {
       <style>{`
         .partners-marquee {
           overflow: hidden;
-          padding: 0.75rem 1.5rem;
+          padding: 1.1rem 2.6rem;
           position: relative;
         }
         .partners-marquee::before,
@@ -98,7 +100,7 @@ export function PartnersMarquee() {
           content: '';
           position: absolute;
           top: 0;
-          width: 120px;
+          width: 150px;
           height: 100%;
           z-index: 2;
           pointer-events: none;
@@ -117,15 +119,16 @@ export function PartnersMarquee() {
         }
         .partners-track {
           display: flex;
-          gap: 1.25rem;
+          align-items: center;
+          gap: 1.6rem;
           width: max-content;
-          animation: partners-marquee 26s linear infinite;
+          animation: partners-marquee 30s linear infinite;
         }
         .partners-track-two {
-          animation-duration: 30s;
+          animation-duration: 34s;
         }
         .partners-sway.is-reverse {
-          animation-duration: 6.5s;
+          animation-duration: 7s;
           animation-delay: 0.4s;
         }
         .partners-marquee.is-reverse .partners-track {
@@ -134,17 +137,20 @@ export function PartnersMarquee() {
         .partners-chip {
           display: inline-flex;
           align-items: center;
-          gap: 0;
-          padding: 0.8rem 1.9rem;
+          gap: 0.75rem;
+          padding: 0.9rem 2.4rem;
+          min-height: 52px;
           border-radius: 999px;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          background:
+            radial-gradient(circle at 20% 20%, rgba(201, 168, 76, 0.16), transparent 55%),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
           box-shadow:
             inset 0 0 0 1px rgba(201, 168, 76, 0.06),
             0 10px 22px rgba(0, 0, 0, 0.3);
           text-transform: uppercase;
-          letter-spacing: 0.24em;
-          font-size: 0.74rem;
+          letter-spacing: 0.18em;
+          font-size: 0.76rem;
           font-weight: 600;
           color: rgba(246, 242, 234, 0.9);
           white-space: nowrap;
@@ -152,6 +158,26 @@ export function PartnersMarquee() {
           animation: chip-float 6s ease-in-out infinite;
           animation-delay: var(--delay, 0s);
           will-change: transform;
+        }
+        .partners-mark {
+          width: 26px;
+          height: 26px;
+          border-radius: 999px;
+          border: 1px solid rgba(201, 168, 76, 0.45);
+          box-shadow: inset 0 0 12px rgba(201, 168, 76, 0.25);
+          position: relative;
+        }
+        .partners-mark::after {
+          content: '';
+          position: absolute;
+          inset: 7px;
+          border-radius: 999px;
+          background: rgba(201, 168, 76, 0.7);
+          box-shadow: 0 0 12px rgba(201, 168, 76, 0.45);
+        }
+        .partners-name {
+          display: inline-block;
+          transform: translateY(1px);
         }
         .partners-chip:hover {
           border-color: rgba(201, 168, 76, 0.6);
@@ -188,17 +214,25 @@ export function PartnersMarquee() {
         }
         @media (max-width: 640px) {
           .partners-track {
-            gap: 0.9rem;
-            animation-duration: 32s;
+            gap: 1.1rem;
+            animation-duration: 36s;
           }
           .partners-chip {
-            padding: 0.65rem 1.35rem;
-            letter-spacing: 0.2em;
-            font-size: 0.68rem;
+            padding: 0.7rem 1.6rem;
+            min-height: 46px;
+            letter-spacing: 0.16em;
+            font-size: 0.7rem;
+          }
+          .partners-mark {
+            width: 22px;
+            height: 22px;
           }
           .partners-marquee::before,
           .partners-marquee::after {
-            width: 48px;
+            width: 70px;
+          }
+          .partners-marquee {
+            padding: 1rem 1.8rem;
           }
         }
         @media (prefers-reduced-motion: reduce) {
