@@ -232,7 +232,9 @@ export function Hero() {
 
             <div className="absolute inset-0 overflow-hidden hero-bg-inner z-0">
               <video
-                ref={el => videosRef.current[idx] = el}
+                ref={(el) => {
+                  videosRef.current[idx] = el;
+                }}
                 className="absolute inset-0 w-full h-full object-cover scale-[1.1]"
                 src={slide.video}
                 data-fallback={slide.videoFallback}
@@ -297,13 +299,17 @@ export function Hero() {
               }}
             >
               <p
-                ref={el => subtitleRefs.current[idx] = el}
+                ref={(el) => {
+                  subtitleRefs.current[idx] = el;
+                }}
                 className="text-primary font-medium tracking-[0.32em] sm:tracking-[0.4em] text-[10px] sm:text-[11px] md:text-xs mb-5 sm:mb-7 uppercase opacity-0"
               >
                 {slide.subtitle}
               </p>
               <h1
-                ref={el => titlesRef.current[idx] = el}
+                ref={(el) => {
+                  titlesRef.current[idx] = el;
+                }}
                 className="text-[clamp(2.4rem,9vw,4.8rem)] sm:text-[clamp(3.5rem,10.5vw,138px)] leading-[0.9] sm:leading-[0.88] font-display text-foreground uppercase flex flex-wrap gap-x-2 sm:gap-x-[1.5vw]"
               >
                 {slide.title.split(' ').map((word, wIdx) => (

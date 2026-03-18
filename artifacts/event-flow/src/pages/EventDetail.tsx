@@ -214,7 +214,12 @@ export default function EventDetail() {
             {/* RIGHT — scrolling timeline */}
             <div className="flex-1 flex flex-col gap-12 sm:gap-20">
               {event.schedule.map((day, di) => (
-                <div key={di} ref={el => dayRefs.current[di] = el}>
+                <div
+                  key={di}
+                  ref={(el) => {
+                    dayRefs.current[di] = el;
+                  }}
+                >
                   {/* Day heading (mobile) */}
                   <div className="md:hidden mb-8">
                     <p className="text-primary text-xs tracking-widest uppercase mb-1">{day.date}</p>
