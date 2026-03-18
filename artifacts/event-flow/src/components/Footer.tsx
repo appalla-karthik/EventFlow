@@ -60,7 +60,7 @@ const SOCIALS = [
 
 export function Footer() {
   return (
-    <footer className="footer-paper pt-14 sm:pt-20 pb-24 sm:pb-28 px-6">
+    <footer className="footer-paper pt-16 sm:pt-22 pb-28 sm:pb-32 px-6">
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-8 md:gap-x-10 lg:gap-x-8">
           {FOOTER_COLUMNS.map((col) => (
