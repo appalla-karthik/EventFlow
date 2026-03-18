@@ -1,0 +1,43 @@
+Act as an award-winning UI/UX Frontend Developer. I want to build a highly immersive, premium Event Showcase and Event Management website. The design language must be heavily inspired by luxury hospitality and high-end creative agencies (think Awwwards-winning sites with smooth scrolling, large typography, and cinematic layouts).
+
+Tech Stack Request: Next.js (or React), Tailwind CSS, and Framer Motion (or GSAP) for complex, high-performance animations. Use Lenis for smooth scrolling.
+
+Design System & Vibe:
+
+Color Palette: Deep, elegant dark mode (e.g., very dark charcoal or rich obsidian) with striking, metallic or neon accent colors for interactions.
+
+Typography: A mix of a highly elegant, oversized Serif font (like 'Playfair Display' or 'Cinzel') for big headings, paired with a clean, modern Sans-Serif (like 'Inter' or 'Roobert') for UI elements and readable text.
+
+UI Elements: Minimalist borders, glassmorphism effects for navigation/cards, magnetic buttons, and a custom interactive cursor that changes state when hovering over clickable items.
+
+Core Sections to Build:
+
+Immersive Hero Section (The Hook): >     * A full-screen, highly interactive event slider.
+
+Include a cinematic background video or high-res image that smoothly transitions when dragging or clicking next.
+
+The event title typography should have a split-text reveal animation (staggered letters sliding up) on load and slide transition.
+
+Featured Events (Interactive Showcase):
+
+A horizontal scrolling section or an asymmetrical grid.
+
+Hovering over an event card should slightly dim the rest of the screen, expand the hovered image, and reveal a sleek 'Book/Manage' button. Use parallax effects on the images inside the cards.
+
+Event Management Module (The Utility):
+
+A sleek, dashboard-like section preview for organizers.
+
+Clean tables or grid views showing event stats, ticket sales progress bars, and attendee counts. Keep the design strictly minimalist but highly functional.
+
+Experiential 'About Us' / Services:
+
+Large typography that highlights your event management expertise. As the user scrolls down, the text should change opacity based on the scroll position (scroll-tied text reveal).
+
+Animation & Interaction Rules (CRITICAL):
+
+Do not use basic CSS transitions for major elements. Rely on Framer Motion/GSAP.
+
+Implement page-load animations: fade in a minimalistic loader that splits open to reveal the hero section.
+
+Ensure every button has a satisfying, smooth hover state (e.g., an arrow sliding in, or a background color sweeping across).

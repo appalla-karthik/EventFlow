@@ -1,0 +1,11 @@
+packages:
+  "gsap": "Animation engine for complex scroll and hover animations"
+  "@gsap/react": "React integration for GSAP"
+  "@studio-freight/lenis": "Smooth scrolling library"
+  "clsx": "Utility for constructing className strings conditionally"
+  "tailwind-merge": "Utility function to efficiently merge Tailwind CSS classes"
+  "lucide-react": "Icons"
+
+notes:
+  - This is a pure frontend showcase, so we use mocked data in our hooks instead of actual API calls.
+  - The application relies heavily on GSAP and Lenis for its awwwards-winning feel.

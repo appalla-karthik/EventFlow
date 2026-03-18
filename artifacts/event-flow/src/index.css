@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Playfair Display', serif;
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-border: hsl(var(--border));
+}
+
+:root {
+  /* Dark Luxury Palette */
+  --background: 0 0% 3%;       /* #080808 */
+  --foreground: 30 24% 94%;    /* #f5f0eb */
+  
+  --primary: 44 55% 54%;       /* #c9a84c (Gold) */
+  --primary-foreground: 0 0% 3%;
+  
+  --secondary: 0 0% 7%;        /* #111111 */
+  --secondary-foreground: 30 24% 94%;
+  
+  --muted: 0 0% 12%;           /* #1e1e1e */
+  --muted-foreground: 35 11% 59%; /* #a0998f */
+  
+  --accent: 44 68% 69%;        /* #e5c97a */
+  --accent-foreground: 0 0% 3%;
+  
+  --card: 0 0% 9%;             /* #161616 */
+  --card-foreground: 30 24% 94%;
+  
+  --border: 44 55% 54% / 0.15; /* Subtle gold border */
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased font-sans overflow-x-hidden;
+    cursor: none; /* Custom cursor handles this */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply tracking-tight font-medium;
+  }
+
+  ::selection {
+    @apply bg-primary text-primary-foreground;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+  .app-cursor {
+    display: none !important;
+  }
+}
+
+@layer utilities {
+  .text-stroke-transparent {
+    -webkit-text-stroke: 1px transparent;
+  }
+  .text-stroke-primary {
+    -webkit-text-stroke: 1px hsl(var(--primary));
+    color: transparent;
+  }
+  .glass-nav {
+    background: rgba(8, 8, 8, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .split-char {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+  }
+  .split-char-inner {
+    display: inline-block;
+    transform: translateY(100%);
+  }
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
