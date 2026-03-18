@@ -1,25 +1,25 @@
 const LOGOS_ROW_ONE = [
-  "AURELIA",
-  "VANTAGE",
-  "STELLARIS",
-  "MIRAGE",
-  "NOVA",
-  "ECLIPSE",
-  "SOLACE",
-  "ORBITAL",
-  "FOUNDARY",
+  "APPLE",
+  "MICROSOFT",
+  "GOOGLE",
+  "AMAZON",
+  "NETFLIX",
+  "ADOBE",
+  "SPOTIFY",
+  "AIRBNB",
+  "SHOPIFY",
 ];
 
 const LOGOS_ROW_TWO = [
-  "LUMINA",
-  "REDWOOD",
-  "HALCYON",
-  "DRIFT",
-  "AETHER",
-  "SUMMIT",
-  "RADIANT",
-  "NORTHERN",
-  "PALISADE",
+  "NIKE",
+  "BMW",
+  "SAMSUNG",
+  "TESLA",
+  "SALESFORCE",
+  "ORACLE",
+  "IBM",
+  "INTEL",
+  "PAYPAL",
 ];
 
 const repeatLogos = (logos: string[], copies = 2) =>
@@ -59,9 +59,6 @@ export function PartnersMarquee() {
                     ['--delay' as never]: `${(idx % 8) * 0.18}s`,
                   }}
                 >
-                  <span className="partners-dot" aria-hidden="true">
-                    +
-                  </span>
                   {logo}
                 </span>
               ))}
@@ -82,9 +79,6 @@ export function PartnersMarquee() {
                     ['--delay' as never]: `${(idx % 8) * 0.16}s`,
                   }}
                 >
-                  <span className="partners-dot" aria-hidden="true">
-                    +
-                  </span>
                   {logo}
                 </span>
               ))}
@@ -96,7 +90,7 @@ export function PartnersMarquee() {
       <style>{`
         .partners-marquee {
           overflow: hidden;
-          padding: 0.5rem 0;
+          padding: 0.75rem 1.5rem;
           position: relative;
         }
         .partners-marquee::before,
@@ -123,12 +117,12 @@ export function PartnersMarquee() {
         }
         .partners-track {
           display: flex;
-          gap: 1rem;
+          gap: 1.25rem;
           width: max-content;
-          animation: partners-marquee 24s linear infinite;
+          animation: partners-marquee 26s linear infinite;
         }
         .partners-track-two {
-          animation-duration: 28s;
+          animation-duration: 30s;
         }
         .partners-sway.is-reverse {
           animation-duration: 6.5s;
@@ -140,16 +134,19 @@ export function PartnersMarquee() {
         .partners-chip {
           display: inline-flex;
           align-items: center;
-          gap: 0.75rem;
-          padding: 0.85rem 1.6rem;
+          gap: 0;
+          padding: 0.8rem 1.9rem;
           border-radius: 999px;
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          background: rgba(255, 255, 255, 0.04);
-          box-shadow: inset 0 0 0 1px rgba(201, 168, 76, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+          box-shadow:
+            inset 0 0 0 1px rgba(201, 168, 76, 0.06),
+            0 10px 22px rgba(0, 0, 0, 0.3);
           text-transform: uppercase;
-          letter-spacing: 0.32em;
-          font-size: 0.78rem;
-          color: rgba(246, 242, 234, 0.85);
+          letter-spacing: 0.24em;
+          font-size: 0.74rem;
+          font-weight: 600;
+          color: rgba(246, 242, 234, 0.9);
           white-space: nowrap;
           font-family: inherit;
           animation: chip-float 6s ease-in-out infinite;
@@ -159,19 +156,6 @@ export function PartnersMarquee() {
         .partners-chip:hover {
           border-color: rgba(201, 168, 76, 0.6);
           box-shadow: 0 0 18px rgba(201, 168, 76, 0.25);
-        }
-        .partners-dot {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: 1.5rem;
-          height: 1.5rem;
-          border-radius: 999px;
-          border: 1px solid rgba(201, 168, 76, 0.45);
-          color: #c9a84c;
-          font-size: 0.7rem;
-          line-height: 1;
-          letter-spacing: 0;
         }
         @keyframes partners-marquee {
           from {
@@ -204,17 +188,17 @@ export function PartnersMarquee() {
         }
         @media (max-width: 640px) {
           .partners-track {
-            gap: 0.75rem;
-            animation-duration: 30s;
+            gap: 0.9rem;
+            animation-duration: 32s;
           }
           .partners-chip {
-            padding: 0.7rem 1.2rem;
-            letter-spacing: 0.24em;
-            font-size: 0.72rem;
+            padding: 0.65rem 1.35rem;
+            letter-spacing: 0.2em;
+            font-size: 0.68rem;
           }
           .partners-marquee::before,
           .partners-marquee::after {
-            width: 64px;
+            width: 48px;
           }
         }
         @media (prefers-reduced-motion: reduce) {
