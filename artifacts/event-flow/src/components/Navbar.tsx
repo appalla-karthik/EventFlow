@@ -177,9 +177,20 @@ export function Navbar() {
   }, []);
 
   const handleMenuItem = (href: string) => {
-    const target = href.startsWith('#') ? `/${href}` : href;
+    if (href.startsWith('#')) {
+      closeMenu();
+      if (window.location.pathname !== '/') {
+        navigate(`/${href}`);
+        return;
+      }
+      const target = document.getElementById(href.replace('#', ''));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      return;
+    }
     closeMenu();
-    navigate(target);
+    navigate(href);
   };
 
   return (

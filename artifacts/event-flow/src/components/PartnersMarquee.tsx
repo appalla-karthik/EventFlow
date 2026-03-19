@@ -1,33 +1,40 @@
+import type { IconType } from "react-icons";
+import * as SiIcons from "react-icons/si";
+
 const LOGOS_ROW_ONE = [
-  { name: "Aurora", mark: "A", tone: "gold" },
-  { name: "Halcyon", mark: "H", tone: "ivory" },
-  { name: "Solstice", mark: "S", tone: "gold" },
-  { name: "Noble", mark: "N", tone: "ivory" },
-  { name: "Echelon", mark: "E", tone: "gold" },
-  { name: "Valence", mark: "V", tone: "ivory" },
-  { name: "Lumen", mark: "L", tone: "gold" },
-  { name: "Opaline", mark: "O", tone: "ivory" },
-  { name: "Monarch", mark: "M", tone: "gold" },
+  { name: "Apple", icon: "SiApple" },
+  { name: "Google", icon: "SiGoogle" },
+  { name: "Microsoft", icon: "SiMicrosoft" },
+  { name: "Amazon", icon: "SiAmazon" },
+  { name: "Meta", icon: "SiMeta" },
+  { name: "Tesla", icon: "SiTesla" },
+  { name: "Adidas", icon: "SiAdidas" },
+  { name: "Spotify", icon: "SiSpotify" },
+  { name: "Airbnb", icon: "SiAirbnb" },
 ];
 
 const LOGOS_ROW_TWO = [
-  { name: "Meridian", mark: "M", tone: "ivory" },
-  { name: "Atlas", mark: "A", tone: "gold" },
-  { name: "Aether", mark: "A", tone: "ivory" },
-  { name: "Kestrel", mark: "K", tone: "gold" },
-  { name: "Regent", mark: "R", tone: "ivory" },
-  { name: "Citrine", mark: "C", tone: "gold" },
-  { name: "Orion", mark: "O", tone: "ivory" },
-  { name: "Sterling", mark: "S", tone: "gold" },
-  { name: "Crown", mark: "C", tone: "ivory" },
+  { name: "Nike", icon: "SiNike" },
+  { name: "Samsung", icon: "SiSamsung" },
+  { name: "Salesforce", icon: "SiSalesforce" },
+  { name: "Oracle", icon: "SiOracle" },
+  { name: "IBM", icon: "SiIbm" },
+  { name: "Intel", icon: "SiIntel" },
+  { name: "PayPal", icon: "SiPaypal" },
+  { name: "Netflix", icon: "SiNetflix" },
+  { name: "Shopify", icon: "SiShopify" },
 ];
 
-const repeatLogos = (logos: string[], copies = 2) =>
+const RAIL_TEXT =
+  "SPONSORS • COLLABORATORS • PARTNERS • SUPPORTERS • ";
+const RAIL_TEXT_LOOP = Array.from({ length: 6 }, () => RAIL_TEXT).join('');
+
+const repeatLogos = <T,>(logos: T[], copies = 2) =>
   Array.from({ length: copies }, () => logos).flat();
 
 export function PartnersMarquee() {
-  const rowOne = repeatLogos(LOGOS_ROW_ONE, 2);
-  const rowTwo = repeatLogos(LOGOS_ROW_TWO, 2);
+  const rowOne = repeatLogos(LOGOS_ROW_ONE, 3);
+  const rowTwo = repeatLogos(LOGOS_ROW_TWO, 3);
 
   return (
     <section className="w-full overflow-hidden bg-[#060606] border-y border-white/5 py-12 sm:py-14">
@@ -44,171 +51,199 @@ export function PartnersMarquee() {
         </p>
       </div>
 
-      <div className="mt-10 space-y-8">
-        <div className="partners-marquee">
-          <div className="partners-sway">
-            <div className="partners-track partners-track-one">
-              {rowOne.map((logo, idx) => (
-                <span
-                  key={`row-one-${logo.name}-${idx}`}
-                  className={`partners-chip partners-chip--${logo.tone}`}
-                  style={{
-                    ['--float' as never]: `${6 + (idx % 4) * 2}px`,
-                    ['--tilt' as never]: `${idx % 2 === 0 ? 2 : -2}deg`,
-                    ['--tilt-neg' as never]: `${idx % 2 === 0 ? -2 : 2}deg`,
-                    ['--delay' as never]: `${(idx % 8) * 0.18}s`,
-                  }}
-                >
-                  <span className="partners-logo">
-                    <span className="partners-emblem" aria-hidden="true">
-                      {logo.mark}
-                    </span>
-                    <span className="partners-wordmark">{logo.name}</span>
-                  </span>
-                </span>
-              ))}
+      <div className="mt-10 space-y-6">
+        <div className="partners-rail">
+          <div className="partners-rail__bg" aria-hidden="true">
+            <div className="partners-rail__clip">
+              <div className="partners-rail__color">
+                <div className="partners-rail__gradients">
+                  <span className="partners-rail__gradient -core" />
+                  <span className="partners-rail__gradient -pro" />
+                </div>
+              </div>
+            </div>
+            <div className="partners-rail__text">
+              <span>{RAIL_TEXT_LOOP}</span>
+              <span>{RAIL_TEXT_LOOP}</span>
             </div>
           </div>
-        </div>
-        <div className="partners-marquee is-reverse">
-          <div className="partners-sway is-reverse">
-            <div className="partners-track partners-track-two">
-              {rowTwo.map((logo, idx) => (
-                <span
-                  key={`row-two-${logo.name}-${idx}`}
-                  className={`partners-chip partners-chip--${logo.tone}`}
-                  style={{
-                    ['--float' as never]: `${5 + (idx % 4) * 2}px`,
-                    ['--tilt' as never]: `${idx % 2 === 0 ? -1.5 : 1.5}deg`,
-                    ['--tilt-neg' as never]: `${idx % 2 === 0 ? 1.5 : -1.5}deg`,
-                    ['--delay' as never]: `${(idx % 8) * 0.16}s`,
-                  }}
-                >
-                  <span className="partners-logo">
-                    <span className="partners-emblem" aria-hidden="true">
-                      {logo.mark}
-                    </span>
-                    <span className="partners-wordmark">{logo.name}</span>
-                  </span>
+          <div className="partners-rail__track">
+            {rowOne.map((logo, idx) => {
+              const Icon =
+                (SiIcons as Record<string, IconType>)[logo.icon] ??
+                (SiIcons as Record<string, IconType>).SiApple;
+              return (
+                <span key={`row-one-${logo.name}-${idx}`} className="partners-rail__item">
+                  <Icon className="partners-rail__icon" aria-hidden="true" />
                 </span>
-              ))}
+              );
+            })}
+          </div>
+        </div>
+        <div className="partners-rail is-reverse">
+          <div className="partners-rail__bg" aria-hidden="true">
+            <div className="partners-rail__clip">
+              <div className="partners-rail__color">
+                <div className="partners-rail__gradients">
+                  <span className="partners-rail__gradient -core" />
+                  <span className="partners-rail__gradient -pro" />
+                </div>
+              </div>
             </div>
+            <div className="partners-rail__text">
+              <span>{RAIL_TEXT_LOOP}</span>
+              <span>{RAIL_TEXT_LOOP}</span>
+            </div>
+          </div>
+          <div className="partners-rail__track">
+            {rowTwo.map((logo, idx) => {
+              const Icon =
+                (SiIcons as Record<string, IconType>)[logo.icon] ??
+                (SiIcons as Record<string, IconType>).SiApple;
+              return (
+                <span key={`row-two-${logo.name}-${idx}`} className="partners-rail__item">
+                  <Icon className="partners-rail__icon" aria-hidden="true" />
+                </span>
+              );
+            })}
           </div>
         </div>
       </div>
 
       <style>{`
-        .partners-marquee {
+        .partners-rail {
           overflow: hidden;
-          padding: 1.2rem 3.1rem;
+          padding: 0.25rem 2.4rem;
           position: relative;
+          min-height: 70px;
         }
-        .partners-marquee::before,
-        .partners-marquee::after {
+        .partners-rail::before,
+        .partners-rail::after {
           content: '';
           position: absolute;
           top: 0;
-          width: 170px;
+          width: 160px;
           height: 100%;
           z-index: 2;
           pointer-events: none;
         }
-        .partners-marquee::before {
+        .partners-rail::before {
           left: 0;
           background: linear-gradient(90deg, #060606 0%, rgba(6, 6, 6, 0) 100%);
         }
-        .partners-marquee::after {
+        .partners-rail::after {
           right: 0;
           background: linear-gradient(270deg, #060606 0%, rgba(6, 6, 6, 0) 100%);
         }
-        .partners-sway {
-          display: block;
-          animation: marquee-sway 5.5s ease-in-out infinite;
-        }
-        .partners-track {
+        .partners-rail__bg {
+          position: absolute;
+          inset: 0;
           display: flex;
           align-items: center;
-          gap: 1.9rem;
-          width: max-content;
-          animation: partners-marquee 32s linear infinite;
+          justify-content: center;
+          pointer-events: none;
+          z-index: 0;
         }
-        .partners-track-two {
-          animation-duration: 36s;
+        .partners-rail__clip {
+          width: 420vw;
+          height: 70px;
+          animation: clip-anim 20s linear infinite;
         }
-        .partners-sway.is-reverse {
-          animation-duration: 7s;
-          animation-delay: 0.4s;
+        .partners-rail__color {
+          position: absolute;
+          inset: 0;
+          background-color: #0c0c0e;
+          animation: color-anim 20s linear infinite;
         }
-        .partners-marquee.is-reverse .partners-track {
+        .partners-rail__gradients {
+          position: absolute;
+          inset: 0;
+        }
+        .partners-rail__gradient {
+          position: absolute;
+          width: 52vw;
+          height: 52vw;
+          border-radius: 50%;
+          filter: blur(12px);
+          opacity: 0.5;
+        }
+        .partners-rail__gradient.-core {
+          background: radial-gradient(circle, rgba(201, 168, 76, 0.7) 0%, rgba(201, 168, 76, 0.1) 60%, transparent 70%);
+          transform: translate(-7vw, -2.3vw);
+          animation: intro-core 3s cubic-bezier(.04,1.15,0.4,.99) 0.5s forwards;
+        }
+        .partners-rail__gradient.-pro {
+          background: radial-gradient(circle, rgba(139, 120, 75, 0.5) 0%, rgba(139, 120, 75, 0.1) 60%, transparent 70%);
+          transform: translate(7vw, 5vw);
+          animation: intro-pro 2.75s cubic-bezier(.04,1.15,0.4,.99) 0.75s forwards;
+        }
+        .partners-rail__text {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          gap: 4rem;
+          font-family: "Times New Roman", "Georgia", serif;
+          text-transform: uppercase;
+          letter-spacing: 0.35em;
+          font-size: clamp(1.2rem, 2.6vw, 2.2rem);
+          color: rgba(201, 168, 76, 0.35);
+          opacity: 0.4;
+          white-space: nowrap;
+          mix-blend-mode: screen;
+          pointer-events: none;
+        }
+        .partners-rail__text span {
+          display: inline-block;
+          animation: partners-rail-text 22s linear infinite;
+        }
+        .partners-rail.is-reverse .partners-rail__text span {
           animation-direction: reverse;
         }
-        .partners-chip {
-          display: inline-flex;
+        .partners-rail__track {
+          display: flex;
           align-items: center;
-          gap: 0.9rem;
-          padding: 1.05rem 2.9rem;
-          min-height: 64px;
-          border-radius: 999px;
-          border: 1px solid rgba(255, 255, 255, 0.16);
-          background:
-            radial-gradient(circle at 20% 20%, rgba(201, 168, 76, 0.2), transparent 55%),
-            linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
-          box-shadow:
-            inset 0 0 0 1px rgba(201, 168, 76, 0.08),
-            0 12px 28px rgba(0, 0, 0, 0.35);
-          text-transform: uppercase;
-          letter-spacing: 0.16em;
-          font-size: 0.8rem;
-          font-weight: 600;
-          color: rgba(246, 242, 234, 0.92);
-          white-space: nowrap;
-          font-family: inherit;
-          animation: chip-float 6s ease-in-out infinite;
-          animation-delay: var(--delay, 0s);
-          will-change: transform;
+          gap: 3rem;
+          width: max-content;
+          animation: partners-rail 26s linear infinite;
+          position: relative;
+          z-index: 1;
+          padding: 0.6rem 0;
         }
-        .partners-chip--gold {
-          border-color: rgba(201, 168, 76, 0.4);
-          background:
-            radial-gradient(circle at 20% 20%, rgba(201, 168, 76, 0.24), transparent 55%),
-            linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
+        .partners-rail.is-reverse .partners-rail__track {
+          animation-direction: reverse;
         }
-        .partners-chip--ivory {
-          border-color: rgba(255, 255, 255, 0.22);
-          background:
-            radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.14), transparent 55%),
-            linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
-        }
-        .partners-logo {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.95rem;
-        }
-        .partners-emblem {
-          width: 34px;
-          height: 34px;
-          border-radius: 10px;
-          border: 1px solid rgba(201, 168, 76, 0.55);
+        .partners-rail__item {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          font-family: "Georgia", "Times New Roman", serif;
-          font-size: 1rem;
-          letter-spacing: 0.08em;
-          color: rgba(246, 242, 234, 0.95);
-          background: radial-gradient(circle at 30% 30%, rgba(201, 168, 76, 0.35), rgba(0, 0, 0, 0.2));
-          box-shadow: inset 0 0 12px rgba(201, 168, 76, 0.35);
+          width: auto;
+          height: auto;
+          background: transparent;
+          border: none;
+          box-shadow: none;
+          padding: 0.2rem 0.4rem;
+          transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+          will-change: transform;
         }
-        .partners-wordmark {
-          font-family: "Times New Roman", "Georgia", serif;
-          font-size: 0.9rem;
-          letter-spacing: 0.28em;
+        .partners-rail__icon {
+          width: 38px;
+          height: 38px;
+          color: rgba(246, 242, 234, 0.9);
+          filter:
+            drop-shadow(0 0 12px rgba(201, 168, 76, 0.35))
+            drop-shadow(0 0 24px rgba(201, 168, 76, 0.2));
         }
-        .partners-chip:hover {
-          border-color: rgba(201, 168, 76, 0.6);
-          box-shadow: 0 0 18px rgba(201, 168, 76, 0.25);
+        .partners-rail:hover .partners-rail__track {
+          animation-play-state: paused;
         }
-        @keyframes partners-marquee {
+        .partners-rail__item:hover {
+          transform: translateY(-4px) scale(1.12);
+          box-shadow:
+            0 0 18px rgba(201, 168, 76, 0.2),
+            0 10px 24px rgba(0, 0, 0, 0.5);
+        }
+        @keyframes partners-rail {
           from {
             transform: translateX(0);
           }
@@ -216,51 +251,72 @@ export function PartnersMarquee() {
             transform: translateX(-50%);
           }
         }
-        @keyframes marquee-sway {
-          0% {
-            transform: translateY(0);
+        @keyframes clip-anim {
+          from {
+            transform: translateX(0%);
           }
-          50% {
-            transform: translateY(-8px);
-          }
-          100% {
-            transform: translateY(0);
+          to {
+            transform: translateX(-50%);
           }
         }
-        @keyframes chip-float {
-          0%,
-          100% {
-            transform: translateY(0) rotate(var(--tilt, 0deg));
+        @keyframes color-anim {
+          from {
+            transform: translateX(0%);
           }
-          50% {
-            transform: translateY(calc(var(--float, 6px) * -1))
-              rotate(var(--tilt-neg, 0deg));
+          to {
+            transform: translateX(50%);
+          }
+        }
+        @keyframes intro-core {
+          from {
+            transform: translate(-7vw, calc(-2.3vw + 100vh));
+          }
+          to {
+            transform: translate(-7vw, -2.3vw);
+          }
+        }
+        @keyframes intro-pro {
+          from {
+            transform: translate(7vw, calc(5vw + 100vh));
+          }
+          to {
+            transform: translate(7vw, 5vw);
+          }
+        }
+        @keyframes partners-rail-text {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
           }
         }
         @media (max-width: 640px) {
-          .partners-track {
-            gap: 1.2rem;
-            animation-duration: 38s;
+          .partners-rail {
+            padding: 0.2rem 1.2rem;
+            min-height: 58px;
           }
-          .partners-chip {
-            padding: 0.85rem 1.8rem;
-            min-height: 56px;
-            letter-spacing: 0.14em;
-            font-size: 0.72rem;
+          .partners-rail__track {
+            gap: 1.6rem;
+            animation-duration: 34s;
           }
-          .partners-emblem {
-            width: 30px;
-            height: 30px;
+          .partners-rail__item {
+            padding: 0.15rem 0.3rem;
           }
-          .partners-wordmark {
-            font-size: 0.78rem;
+          .partners-rail__icon {
+            width: 28px;
+            height: 28px;
           }
-          .partners-marquee::before,
-          .partners-marquee::after {
-            width: 90px;
+          .partners-rail::before,
+          .partners-rail::after {
+            width: 70px;
           }
-          .partners-marquee {
-            padding: 1.05rem 2.2rem;
+          .partners-rail__clip {
+            height: 56px;
+          }
+          .partners-rail__text {
+            font-size: 1.05rem;
+            letter-spacing: 0.3em;
           }
         }
         @media (prefers-reduced-motion: reduce) {

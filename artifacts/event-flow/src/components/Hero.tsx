@@ -172,7 +172,7 @@ export function Hero() {
   if (!slides) return null;
 
   return (
-    <section ref={containerRef} className="relative w-full h-[100svh] sm:h-screen mt-[8px] sm:mt-[12px] md:mt-[16px] overflow-hidden bg-background">
+    <section ref={containerRef} className="relative w-full h-[100svh] sm:h-screen mt-0 overflow-hidden bg-background">
 
       {/* ── SVG Distortion Filter ── */}
       <svg className="absolute w-0 h-0" style={{ position: 'absolute' }}>

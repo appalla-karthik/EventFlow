@@ -29,6 +29,25 @@ export default function Home() {
     return () => window.clearTimeout(fallback);
   }, []);
 
+  useEffect(() => {
+    if (loading) return;
+    const hash = window.location.hash;
+    if (!hash) return;
+    const id = hash.replace('#', '');
+    const scrollToTarget = () => {
+      const target = document.getElementById(id);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    };
+    const t1 = window.setTimeout(scrollToTarget, 120);
+    const t2 = window.setTimeout(scrollToTarget, 420);
+    return () => {
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+    };
+  }, [loading]);
+
   return (
     <>
       <Cursor />
@@ -42,16 +61,24 @@ export default function Home() {
         <main>
           <Hero />
           <Marquee />
-          <FeaturedEvents />
-          <UpcomingEvents />
+          <section id="events" className="scroll-mt-28">
+            <FeaturedEvents />
+          </section>
+          <section id="upcoming" className="scroll-mt-28">
+            <UpcomingEvents />
+          </section>
           <HorizontalCategories />
           <Stats />
           <Process />
           <KineticShowcase />
-          <Services />
+          <section id="services" className="scroll-mt-28">
+            <Services />
+          </section>
           <Testimonials />
           <PartnersMarquee />
-          <ContactCTA />
+          <section id="contact" className="scroll-mt-28">
+            <ContactCTA />
+          </section>
         </main>
         <Footer />
       </div>
