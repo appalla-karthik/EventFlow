@@ -291,7 +291,7 @@ export default function CategoryDetail() {
               className="sticky-grid__preload w-full h-full object-cover opacity-70"
             />
           </div>
-          <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20">
+          <div className="absolute top-4 left-6 sm:top-6 sm:left-10 z-20">
             <button
               onClick={() => navigate("/")}
               className="flex items-center gap-2 text-white/70 hover:text-white transition-colors text-xs tracking-[0.35em] uppercase group"

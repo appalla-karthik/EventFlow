@@ -17,13 +17,13 @@ export function HorizontalCategories() {
 
     const section = sectionRef.current;
     const track = trackRef.current;
-    const panels = gsap.utils.toArray<HTMLElement>('.h-panel');
     const totalWidth = track.scrollWidth;
     const windowWidth = window.innerWidth;
     const scrollDistance = totalWidth - windowWidth;
 
     const ctx = gsap.context(() => {
-      gsap.to(track, {
+      const panels = gsap.utils.toArray<HTMLElement>('.h-panel');
+      const scrollTween = gsap.to(track, {
         x: -scrollDistance,
         ease: 'none',
         scrollTrigger: {
@@ -34,9 +34,6 @@ export function HorizontalCategories() {
           end: () => `+=${scrollDistance}`,
           invalidateOnRefresh: true,
           anticipatePin: 1,
-          onLeave: () => {
-            ScrollTrigger.refresh();
-          }
         }
       });
 
@@ -51,7 +48,7 @@ export function HorizontalCategories() {
               ease: 'none',
               scrollTrigger: {
                 trigger: panel,
-                containerAnimation: gsap.globalTimeline,
+                containerAnimation: scrollTween,
                 start: 'left right',
                 end: 'left left',
                 scrub: true,

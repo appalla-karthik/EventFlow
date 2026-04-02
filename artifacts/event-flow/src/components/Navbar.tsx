@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
+import type { MouseEvent } from 'react';
 import gsap from 'gsap';
 import { MagneticButton } from './MagneticButton';
 import { cn } from '@/lib/utils';
@@ -17,12 +18,32 @@ export function Navbar() {
   const [location, navigate] = useLocation();
 
   const navItems = [
-    { label: 'Events', href: '#events' },
+    { label: 'Events', href: '/events' },
     { label: 'Upcoming', href: '#upcoming' },
     { label: 'Services', href: '#services' },
     { label: 'Portfolio', href: '/portfolio' },
     { label: 'Contact', href: '#contact' },
   ];
+
+  const scrollToSection = (hash: string) => {
+    const id = hash.replace('#', '');
+    const target = document.getElementById(id);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    const path = window.location.pathname.replace(/\/$/, '');
+    window.history.replaceState(null, '', `${path}${hash}`);
+  };
+
+  const handleAnchorNavigation = (hash: string) => {
+    const performScroll = () => scrollToSection(hash);
+    if (window.location.pathname !== '/') {
+      navigate('/');
+      window.setTimeout(performScroll, 200);
+      return;
+    }
+    performScroll();
+  };
 
   const menuImages = [
     "https://images.unsplash.com/photo-1519671282429-b44660ead0a7?w=1200&q=80",
@@ -177,20 +198,18 @@ export function Navbar() {
   }, []);
 
   const handleMenuItem = (href: string) => {
+    closeMenu();
     if (href.startsWith('#')) {
-      closeMenu();
-      if (window.location.pathname !== '/') {
-        navigate(`/${href}`);
-        return;
-      }
-      const target = document.getElementById(href.replace('#', ''));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      handleAnchorNavigation(href);
       return;
     }
-    closeMenu();
     navigate(href);
+  };
+
+  const handleNavLinkClick = (href: string, event: MouseEvent<HTMLAnchorElement>) => {
+    if (!href.startsWith('#')) return;
+    event.preventDefault();
+    handleAnchorNavigation(href);
   };
 
   return (
@@ -205,14 +224,17 @@ export function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-6 flex items-center justify-between">
           <Link href="/" className="text-xl sm:text-2xl font-display font-semibold tracking-wide text-foreground cursor-none">
-            Event<span className="text-primary italic">Flow</span>
+            Shivora <span className="text-primary italic">Events</span>
           </Link>
           
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => {
               const isAnchor = item.href.startsWith('#');
               const target = isAnchor ? `/${item.href}` : item.href;
-              const isActive = !isAnchor && location === item.href;
+              const isActive =
+                !isAnchor &&
+                (location === item.href ||
+                  (item.href === '/events' && location.startsWith('/events')));
               return (
                 <Link
                   key={item.href}
@@ -221,6 +243,7 @@ export function Navbar() {
                     "text-sm font-medium transition-colors cursor-none relative group",
                     isActive ? "text-primary" : "text-foreground/80 hover:text-primary"
                   )}
+                  onClick={(event) => handleNavLinkClick(item.href, event)}
                 >
                   {item.label}
                   <span

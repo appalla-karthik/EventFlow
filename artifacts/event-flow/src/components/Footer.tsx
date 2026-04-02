@@ -102,8 +102,8 @@ export function Footer() {
       </div>
 
       <div className="footer-embedded-logo" aria-hidden="true">
-        <span className="footer-logo-text">Event</span>
-        <span className="footer-logo-emphasis">Flow</span>
+        <span className="footer-logo-text">Shivora</span>
+        <span className="footer-logo-emphasis">Events</span>
       </div>
 
       <style>{`
@@ -171,7 +171,7 @@ export function Footer() {
           font-family: var(--font-display);
           font-weight: 800;
           letter-spacing: 0.015em;
-          font-size: clamp(140px, 20vw, 360px);
+          font-size: clamp(88px, 13vw, 220px);
           line-height: 0.9;
           color: rgba(235, 245, 220, 0.22);
           text-shadow: 0 18px 50px rgba(0, 0, 0, 0.6);
@@ -187,14 +187,14 @@ export function Footer() {
         }
         @media (max-width: 1024px) {
           .footer-embedded-logo {
-            font-size: clamp(120px, 22vw, 280px);
+            font-size: clamp(74px, 15vw, 170px);
             bottom: 10px;
           }
         }
         @media (max-width: 640px) {
           .footer-embedded-logo {
             bottom: 6px;
-            font-size: clamp(78px, 22vw, 160px);
+            font-size: clamp(48px, 12vw, 88px);
             letter-spacing: 0.02em;
             color: rgba(235, 245, 220, 0.18);
           }

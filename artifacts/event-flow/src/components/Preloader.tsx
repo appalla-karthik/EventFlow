@@ -11,6 +11,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
 
   useEffect(() => {
     let current = 0;
+    let rafId: number | null = null;
     const updateProgress = () => {
       current += Math.random() * 5;
       if (current > 100) current = 100;
@@ -21,22 +22,32 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
       }
 
       if (current < 100) {
-        requestAnimationFrame(updateProgress);
+        rafId = requestAnimationFrame(updateProgress);
       } else {
         finishAnimation();
       }
     };
 
     const finishAnimation = () => {
+      const container = containerRef.current;
+      const content = contentRef.current;
+      const topPanel = topPanelRef.current;
+      const bottomPanel = bottomPanelRef.current;
+
+      if (!container || !content || !topPanel || !bottomPanel) {
+        onComplete();
+        return;
+      }
+
       const tl = gsap.timeline({
         onComplete: () => {
-          if (containerRef.current) containerRef.current.style.display = 'none';
+          container.style.display = 'none';
           onComplete();
         }
       });
 
-      tl.to(contentRef.current, { opacity: 0, duration: 0.4, ease: "power2.inOut" }, "+=0.2")
-        .to([topPanelRef.current, bottomPanelRef.current], {
+      tl.to(content, { opacity: 0, duration: 0.4, ease: "power2.inOut" }, "+=0.2")
+        .to([topPanel, bottomPanel], {
           height: 0,
           duration: 0.8,
           ease: "expo.inOut",
@@ -45,10 +56,13 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
     };
 
     const timer = setTimeout(() => {
-      requestAnimationFrame(updateProgress);
+      rafId = requestAnimationFrame(updateProgress);
     }, 200);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, [onComplete]);
 
   return (

@@ -107,7 +107,10 @@ export function FeaturedEvents() {
             <p className="text-foreground/40 text-sm max-w-xs text-right hidden md:block leading-relaxed">
               Experiences crafted for those who demand nothing less than extraordinary.
             </p>
-            <button className="group flex items-center gap-2 text-[11px] uppercase tracking-[0.35em] text-[#c9a84c] hover:text-white transition-colors pb-px border-b border-[#c9a84c]/40 hover:border-white/30">
+            <button
+              className="group flex items-center gap-2 text-[11px] uppercase tracking-[0.35em] text-[#c9a84c] hover:text-white transition-colors pb-px border-b border-[#c9a84c]/40 hover:border-white/30"
+              onClick={() => navigate('/events')}
+            >
               View All Events
               <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </button>

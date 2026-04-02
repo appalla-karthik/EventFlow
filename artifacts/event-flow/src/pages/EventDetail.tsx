@@ -112,7 +112,7 @@ export default function EventDetail() {
         </div>
 
         {/* Back button */}
-        <div className="absolute top-4 left-4 sm:top-8 sm:left-8 z-30">
+        <div className="absolute top-4 left-6 sm:top-8 sm:left-10 z-30">
           <button
             onClick={() => navigate('/')}
             className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm tracking-widest uppercase group"

@@ -40,7 +40,7 @@ export default function ReservePage() {
           <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-20">
             <button
               onClick={() => navigate("/")}
-              className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-xs tracking-[0.35em] uppercase group"
+              className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-xs tracking-[0.35em] uppercase group ml-3"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
               Back

@@ -7,7 +7,7 @@ export function Testimonials() {
 
   const testimonials = [
     {
-      text: "EventFlow transformed our annual gala into a cinematic experience. The attention to detail and flawless execution was unmatched in the industry.",
+      text: "Shivora Events transformed our annual gala into a cinematic experience. The attention to detail and flawless execution was unmatched in the industry.",
       author: "Eleanor Vance",
       role: "Director of Philanthropy",
     },
